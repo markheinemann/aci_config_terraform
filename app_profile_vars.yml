@@ -1,0 +1,4 @@
+app_profile:
+- app_profile: 3tier_app
+  app_profile_tenant: marks_first_tenant
+

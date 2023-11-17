@@ -1,0 +1,4 @@
+vrf:
+- vrf: marks_vrf
+  vrf_tenant: marks_first_tenant
+

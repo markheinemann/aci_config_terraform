@@ -1,0 +1,7 @@
+subnet:
+- subnet: 10.1.1.3/24
+  subnet_tn_name: marks_first_tenant
+  subnet_bd: mark_first_bd_for_subnet
+  subnet_scope: private
+  subnet_description: This aci subnet is created by Terraform
+
