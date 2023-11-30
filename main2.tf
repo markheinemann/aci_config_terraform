@@ -194,10 +194,3 @@ resource "aci_vlan_pool" "vlan_pool" {
   description = "From Terraform"
   alloc_mode  = "static"
 }
-
-
-
-  #depends_on = [
-    #aci_tenant.tenants,
-  ]
-}
