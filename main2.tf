@@ -190,7 +190,7 @@ output "vlan_pool_details" {
 # creating vlan pool
 resource "aci_vlan_pool" "vlan_pool" {
   for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
-  name  = each.value.vlan_pool_name
+  name  = each.value.vlan_pool
   description = "From Terraform"
   alloc_mode  = "static"
 }
