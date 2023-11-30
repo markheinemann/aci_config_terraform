@@ -176,3 +176,25 @@ resource "aci_vrf" "vrfs" {
 }
 
 
+#new locals for Vlan_Pool
+
+
+locals {
+  yaml_vlan_pools= yamldecode(file("${path.module}/vlan_pool_vars.yml"))
+}
+
+output "vlan_pool_details" {
+  value = { for t in local.yaml_vlan_pools.vlan_pools : t.vlan_pools => t }
+}
+
+resource "aci_ranges" "vlan_pools" {
+  for_each = { for t in local.yaml_vlan_pools.vlan_pools: t.vlan_pools => t }
+  name = each.value.vlan_pools
+  #tenant_dn = "uni/tn-${each.value.vrf_tenant}"
+  #aci_tenant_fv_ctx_att = 
+  
+
+  #depends_on = [
+    #aci_tenant.tenants,
+  ]
+}

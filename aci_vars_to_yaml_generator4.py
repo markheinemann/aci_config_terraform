@@ -306,6 +306,83 @@ with open(output_yaml_file_path_leaf, 'w') as yaml_file:
 pprint.pprint(data_epg)
 
 
+
+
+##############################################
+#          PROCESS VLAN_Pool     #
+##############################################
+
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "VLAN_POOL"
+
+output_yaml_file_path_leaf = "vlan_pool_vars.yml"
+
+data_vlan_pool = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
+
+
+
+    if type == "vlan_pool":
+        data_vlan_pool[type].append({
+            "vlan_pool_name": row[1],
+            #"epg_tenant": data_tenant["tenant"][0]["tenant_name"],
+            "range_from": row[2],
+            "range_to": row[3],
+            "allocation_mode": row[4]
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in data_vlan_pool.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- vlan_pool: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  range_from: {}\n".format(item["range_from"]))
+            yaml_file.write("  range_to: {}\n".format(item["range_to"]))
+            yaml_file.write("  allocation_mode: {}\n".format(item["allocation_mode"]))
+            
+            yaml_file.write("\n")
+
+pprint.pprint(data_vlan_pool)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Close the Excel file
 workbook.close()
 
