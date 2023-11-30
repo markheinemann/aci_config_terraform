@@ -205,4 +205,9 @@ resource "aci_ranges" "range" {
   to            = each.value.range_to
   alloc_mode    = each.value.allocation_mode
   #role          = "external"
+
+
+  depends_on = [
+  aci_vlan_pool.vlan_pool
+]
 }
