@@ -180,16 +180,16 @@ resource "aci_vrf" "vrfs" {
 
 
 locals {
-  yaml_vlan_pools= yamldecode(file("${path.module}/vlan_pool_vars.yml"))
+  yaml_vlan_pool= yamldecode(file("${path.module}/vlan_pool_vars.yml"))
 }
 
 output "vlan_pool_details" {
-  value = { for t in local.yaml_vlan_pools.vlan_pools : t.vlan_pools => t }
+  value = { for t in local.yaml_vlan_pool.vlan_pool : t.vlan_pool => t }
 }
 
 # creating vlan pool
 resource "aci_vlan_pool" "vlan_pool" {
-  for_each = { for t in local.yaml_vlan_pools.vlan_pools: t.vlan_pools => t }
+  for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
   name  = each.value.vlan_pool_name
   description = "From Terraform"
   alloc_mode  = "static"
