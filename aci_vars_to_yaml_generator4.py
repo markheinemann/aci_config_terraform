@@ -344,7 +344,7 @@ with open(output_yaml_file_path_leaf, 'w') as yaml_file:
         for item in items:
 #            print(item)
             yaml_file.write("- vlan_pool: {}\n".format(item["vlan_pool_name"]))
-            yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
             yaml_file.write("  range_from: {}\n".format(item["range_from"]))
             yaml_file.write("  range_to: {}\n".format(item["range_to"]))
             yaml_file.write("  allocation_mode: {}\n".format(item["allocation_mode"]))

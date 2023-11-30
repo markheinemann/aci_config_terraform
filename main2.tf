@@ -187,12 +187,15 @@ output "vlan_pool_details" {
   value = { for t in local.yaml_vlan_pools.vlan_pools : t.vlan_pools => t }
 }
 
-resource "aci_ranges" "vlan_pools" {
+# creating vlan pool
+resource "aci_vlan_pool" "vlan_pool" {
   for_each = { for t in local.yaml_vlan_pools.vlan_pools: t.vlan_pools => t }
-  name = each.value.vlan_pools
-  #tenant_dn = "uni/tn-${each.value.vrf_tenant}"
-  #aci_tenant_fv_ctx_att = 
-  
+  name  = each.value.vlan_pool_name
+  description = "From Terraform"
+  alloc_mode  = "static"
+}
+
+
 
   #depends_on = [
     #aci_tenant.tenants,
