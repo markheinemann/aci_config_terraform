@@ -198,7 +198,8 @@ resource "aci_vlan_pool" "vlan_pool" {
 #create range
 resource "aci_ranges" "range" {
   for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
-  vlan_pool_dn  = "uni/infra/vlanns-[mark_pool]-static"
+  #vlan_pool_dn  = "uni/infra/vlanns-[mark_pool]-static"
+  vlan_pool_dn  = "uni/infra/vlanns-$each.value.vlan_pool_name}-static"
   description   = "From Terraform"
   from          = each.value.range_from
   to            = each.value.range_to
