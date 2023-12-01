@@ -227,5 +227,5 @@ output "physical_domain_details" {
 resource "aci_physical_domain" "phys_domain" {
   for_each = { for t in local.yaml_physical_domain.physical_domain: t.physical_domain => t }
   name  = each.value.physical_domain
-  description = "From Terraform"
+  #description = "From Terraform"
 }
