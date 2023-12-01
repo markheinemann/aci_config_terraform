@@ -380,7 +380,7 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if type == "physical_domain":
         data_physical_domain[type].append({
             "physical_domain_name": row[1],
-            #"epg_tenant": data_tenant["tenant"][0]["tenant_name"],
+            "mode": row[3],
             "vlan_pool_name": row[2]
         })
 
@@ -392,6 +392,7 @@ with open(output_yaml_file_path_leaf, 'w') as yaml_file:
             yaml_file.write("- physical_domain: {}\n".format(item["physical_domain_name"]))
             #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
             yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  mode: {}\n".format(item["mode"]))
 
             
             yaml_file.write("\n")

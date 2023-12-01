@@ -1,4 +1,5 @@
 physical_domain:
 - physical_domain: markacidomain
   vlan_pool_name: mark_pool
+  mode: static
 

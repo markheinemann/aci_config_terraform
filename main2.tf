@@ -192,7 +192,7 @@ resource "aci_vlan_pool" "vlan_pool" {
   for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
   name  = each.value.vlan_pool
   description = "From Terraform"
-  alloc_mode  = "static"
+  alloc_mode  = each.value.allocation_mode
 }
 
 #create range
@@ -227,7 +227,7 @@ output "physical_domain_details" {
 resource "aci_physical_domain" "phys_domain" {
   for_each = { for t in local.yaml_physical_domain.physical_domain: t.physical_domain => t }
   name  = each.value.physical_domain
-  relation_infra_rs_vlan_ns = "uni/infra/vlanns-[${each.value.vlan_pool_name}]-static"
+  relation_infra_rs_vlan_ns = "uni/infra/vlanns-[${each.value.vlan_pool_name}]-${each.value.mode}"
 
   depends_on = [
   aci_vlan_pool.vlan_pool
