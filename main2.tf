@@ -211,3 +211,21 @@ resource "aci_ranges" "range" {
   aci_vlan_pool.vlan_pool
 ]
 }
+
+#new locals for Physical_Domain
+
+
+locals {
+  yaml_physical_domain= yamldecode(file("${path.module}/physical_domain_vars.yml"))
+}
+
+output "physical_domain_details" {
+  value = { for t in local.yaml_physical_domain.physical_domain : t.physical_domain => t }
+}
+
+# creating physical_domain
+resource "aci_physical_domain" "phys_domain" {
+  for_each = { for t in local.yaml_physical_domain.physical_domain: t.physical_domain => t }
+  name  = each.value.physical_domain
+  description = "From Terraform"
+}
