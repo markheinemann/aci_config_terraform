@@ -401,7 +401,45 @@ pprint.pprint(data_physical_domain)
 
 
 
+#############################################
+#          PROCESS AAEP   #
+##############################################
 
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "AAEP"
+
+output_yaml_file_path_leaf = "aaep_vars.yml"
+
+data_aaep = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
+
+
+
+    if type == "aaep":
+        data_aaep[type].append({
+            "aaep_name": row[1],
+            "attached_domain": row[2]
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in data_aaep.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- aaep: {}\n".format(item["aaep_name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  attached_domain: {}\n".format(item["attached_domain"]))
+            
+            yaml_file.write("\n")
+
+pprint.pprint(data_aaep)
 
 
 

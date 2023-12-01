@@ -233,3 +233,26 @@ resource "aci_physical_domain" "phys_domain" {
   aci_vlan_pool.vlan_pool
 ]
 }
+
+
+#new locals for aaep
+
+
+locals {
+  yaml_aaep= yamldecode(file("${path.module}/aaep_vars.yml"))
+}
+
+output "aaep" {
+  value = { for t in local.yaml_aaep.aaep : t.aaep => t }
+}
+
+# creating aaep
+resource "aci_attachable_access_entity_profile" "aaep" {
+  for_each = { for t in local.yaml_aaep.aaep: t.aaep => t }
+  name  = each.value.aaep_name
+  #relation_infra_rs_vlan_ns = "uni/infra/vlanns-[${each.value.vlan_pool_name}]-${each.value.mode}"
+
+  #depends_on = [
+  #aci_vlan_pool.vlan_pool
+]
+}
