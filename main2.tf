@@ -249,7 +249,7 @@ output "aaep" {
 # creating aaep
 resource "aci_attachable_access_entity_profile" "aaep" {
   for_each = { for t in local.yaml_aaep.aaep: t.aaep => t }
-  name  = each.value.aaep_name
+  name  = each.value.aaep
   #relation_infra_rs_vlan_ns = "uni/infra/vlanns-[${each.value.vlan_pool_name}]-${each.value.mode}"
 
   #depends_on = [
