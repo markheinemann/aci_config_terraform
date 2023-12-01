@@ -227,7 +227,7 @@ output "physical_domain_details" {
 resource "aci_physical_domain" "phys_domain" {
   for_each = { for t in local.yaml_physical_domain.physical_domain: t.physical_domain => t }
   name  = each.value.physical_domain
-  relation_infra_rs_vlan_ns = "uni/infra/vlanns-${[each.value.vlan_pool_name]}"
+  relation_infra_rs_vlan_ns = "uni/infra/vlanns-[${each.value.vlan_pool_name}]"
 
   depends_on = [
   aci_vlan_pool.vlan_pool
