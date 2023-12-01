@@ -256,3 +256,11 @@ resource "aci_attachable_access_entity_profile" "aaep" {
   #aci_vlan_pool.vlan_pool
 #]
 }
+
+# map aeep to domain
+
+resource "aci_aaep_to_domain" "aaeptodomain" {
+  for_each = { for t in local.yaml_aaep.aaep: t.aaep => t }
+  attachable_access_entity_profile_dn = "uni/infra/attentp-${each.value.aaep}"
+  domain_dn                           = "uni/phys-${each.value.attached_domain}"
+}
