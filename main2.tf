@@ -263,4 +263,11 @@ resource "aci_aaep_to_domain" "aaeptodomain" {
   for_each = { for t in local.yaml_aaep.aaep: t.aaep => t }
   attachable_access_entity_profile_dn = "uni/infra/attentp-${each.value.aaep}"
   domain_dn                           = "uni/phys-${each.value.attached_domain}"
+
+
+  depends_on = [
+  aci_attachable_access_entity_profile.aaep,
+  aci_physical_domain.phys_domain
+
+]
 }
