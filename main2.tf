@@ -62,6 +62,7 @@ resource "aci_bridge_domain" "bridge_domains" {
   name        = each.value.bd
   description = each.value.bd_description
   arp_flood   = "yes"
+  unk_mac_ucast_act = "flood"
   relation_fv_rs_ctx = "uni/tn-${each.value.bd_tenant_name}/ctx-${each.value.bd_vrf}"
   #relation_fv_rs_ctx = "marks_vrf"
 
