@@ -6,6 +6,7 @@ import os
 import shutil
 import openpyxl
 import pprint
+import sys
 
 
 
@@ -445,282 +446,249 @@ pprint.pprint(data_aaep)
 
 
 
+#############################################
+#          PROCESS LINK LEVEL POLICY      #
+##############################################
+
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "LINK_LEVEL_POLICY"
+
+output_yaml_file_path_leaf = "link_level_policy_vars.yml"
+
+data_link_level_policy = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
+
+
+
+    if type == "link_level_policy":
+        data_link_level_policy[type].append({
+            "name": row[1],
+            "description": row[2],
+            "speed": row[3],
+            "linkdebounce": row[4],
+            "fec": row[5],
+            "autoneg": row[6]
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in data_link_level_policy.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- link_level_policy: {}\n".format(item["name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  description: {}\n".format(item["description"]))
+            yaml_file.write("  speed: {}\n".format(item["speed"]))
+            yaml_file.write("  linkdebounce: {}\n".format(item["linkdebounce"]))
+            yaml_file.write("  fec: {}\n".format(item["fec"]))
+            yaml_file.write("  autoneg: '{}'\n".format(item["autoneg"]))
+            
+            
+            yaml_file.write("\n")
+
+pprint.pprint(data_link_level_policy)
 
 
 
 
 
+#############################################
+#          PROCESS CDP INT POLICY      #
+##############################################
+
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "CDP_POLICY"
+
+output_yaml_file_path_leaf = "cdp_policy_vars.yml"
+
+cdp_policy = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
 
 
 
+    if type == "cdp_policy":
+        cdp_policy[type].append({
+            "name": row[1],
+            "description": row[2],
+            "admin_state": row[3]
+
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in cdp_policy.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- cdp_policy: {}\n".format(item["name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  description: {}\n".format(item["description"]))
+            yaml_file.write("  admin_state: {}\n".format(item["admin_state"]))
+
+            
+            
+            yaml_file.write("\n")
+
+pprint.pprint(cdp_policy)
+
+
+#############################################
+#          PROCESS LACP INT POLICY      #
+##############################################
+
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "LACP_POLICY"
+
+output_yaml_file_path_leaf = "lacp_policy_vars.yml"
+
+lacp_policy = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
 
 
 
+    if type == "lacp_policy":
+        lacp_policy[type].append({
+            "name": row[1],
+            "description": row[2],
+            "min_links": row[3],
+            "max_links": row[4],
+            "mode": row[5]
+
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in lacp_policy.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- lacp_policy: {}\n".format(item["name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  description: {}\n".format(item["description"]))
+            yaml_file.write("  min_links: {}\n".format(item["min_links"]))
+            yaml_file.write("  max_links: {}\n".format(item["max_links"]))
+            yaml_file.write("  mode: {}\n".format(item["mode"]))
+
+            
+            
+            yaml_file.write("\n")
+
+pprint.pprint(lacp_policy)
 
 
 
+#############################################
+#          PROCESS VPC                       #
+##############################################
+
+xlsx_file_path = "Book2.xlsx"
+worksheet_name = "VPC"
+
+output_yaml_file_path_leaf = "vpc_vars.yml"
+
+vpc_config = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
+
+    if type == "vpc_policy_group":
+        vpc_config[type].append({
+            "vpc_policy_group_name": row[1],
+            "associated_cdp_policy": row[2],
+            "associated_lacp_policy": row[3],
+            "associated_aaep": row[4]
+        })
+
+    
+
+    if type == "leaf_interface_profile":
+        vpc_config[type].append({
+            "leaf_interface_profile_name": row[1],
+            "leaf_interface_profile_desc": row[2]
+        })
 
 
-
-
-# Close the Excel file
-workbook.close()
-
+    if type == "interface_selector":
+        vpc_config[type].append({
+            "interface_selector_name": row[1],
+            "from_port": row[2],
+            "to_port": row[3]
+        })
+    if type == "leaf_name":
+        vpc_config[type].append({
+            "leaf_name": row[1],
+            "from_switch": row[2],
+            "to_switch": row[3]
+        })
+print("hello")
+pprint.pprint(vpc_config)
 
 #sys.exit()
 
 
-            # vlan_segments = item["vlan_segments"]
-            # for i, segment in enumerate(vlan_segments):
-            #     if "," in segment:
-            #         vlan, vn_segment = segment.split(",", 1)
-            #         vlan_key = "Vlan{}".format(i+1)
-            #         segment_key = "vn segment{}".format(i+1)
-            #         yaml_file.write("  {}: {}\n".format(vlan_key, vlan.strip()))
-            #         yaml_file.write("  {}: {}\n".format(segment_key, vn_segment.strip()))
 
-
-            # interface_to_spine = item["interface_to_spine"]
-            # for i, description in enumerate(interface_to_spine):
-            #     if "," in description:
-            #         interface, desc = description.split(",", 1)
-            #         interface_key = "Ethernet{}".format(i+1)
-            #         desc_key = "description{}".format(i+1)
-            #         yaml_file.write("  {}: {}\n".format(interface_key, interface.strip()))
-            #         yaml_file.write("  {}: {}\n".format(desc_key, desc.strip()))
-
-
-            # yaml_file.write("  vrf: {}\n".format(item["vrf"]))
-
-            # yaml_file.write("  vlan:\n")
-            # for vlan in item["vlan"]:
-            #     yaml_file.write("    - {}\n".format(vlan))
-
-            # yaml_file.write("  l3vni: {}\n".format(item["l3vni"]))
-
-            # yaml_file.write("  l3vni_svi: {}\n".format(item["l3vni_svi"]))
-
-            # vlan_anycast_gw = item["vlan_anycast_gw"]
-            # for i, gateway in enumerate(vlan_anycast_gw):
-            #     if "," in gateway:
-            #         vlan, gw = gateway.split(",", 1)
-            #         vlan_key = "gw_vlan{}".format(i+1)
-            #         gw_key = "vlan_anycast_gateway{}".format(i+1)
-            #         yaml_file.write("  {}: {}\n".format(vlan_key, vlan.strip()))
-            #         yaml_file.write("  {}: {}\n".format(gw_key, gw.strip()))
-
-            # yaml_file.write("  anycast_gateway_mac: {}\n".format(item["anycast_gateway_mac"]))
-
-            # yaml_file.write("  ospf_process: {}\n".format(item["ospf_process"]))
-
-            # yaml_file.write("  nve_multicast_grp: {}\n".format(item["nve_multicast_grp"]))
-
-            # yaml_file.write("  pim_rp_address: {}\n".format(item["pim_rp_address"]))
-
-            # yaml_file.write("  pim_grp_list: {}\n".format(item["pim_grp_list"]))
-
-            # yaml_file.write("  pim_ssm_range: {}\n".format(item["pim_ssm_range"]))
-
-            # yaml_file.write("  local_bgp_as: {}\n".format(item["local_bgp_as"]))
-
-            # yaml_file.write("  remote_bgp_as: {}\n".format(item["remote_bgp_as"]))
-
-            # yaml_file.write("  bgp_neighbor:\n")
-            # for bgp_neighbor in item["bgp_neighbor"]:
-            #     yaml_file.write("    - {}\n".format(bgp_neighbor))
-
-            # yaml_file.write("  advertised_network:\n")
-            # for advertised_network in item["advertised_network"]:
-            #     yaml_file.write("    - {}\n".format(advertised_network))
-
-
-            
-            #yaml_file.write("\n")
-        #print(f"YAML file generated at: {output_yaml_file_path_leaf}")
-
-
-#         # move the extraced vars to roles/leaf/vars
-
-#         # Define the source file path for LEAF
-#         source_file = 'leaf_evpn_vars.yml'
-
-#         # Define the destination folder path
-#         destination_folder = 'roles/leaf/vars'
-
-#         # Define the new file name
-#         new_file_name = 'main.yml'
-
-#         # Create the full path for the destination file
-#         destination_file = os.path.join(destination_folder, new_file_name)
-
-#         # Move the file to the destination folder
-#         shutil.move(source_file, destination_file)
-
-#         # Output a success message
-#         print(f"The file '{source_file}' has been moved to '{destination_file}' and renamed to '{new_file_name}'.")
-
-
-
-
-# # NOW REPEAT EXTRACTION FOR SPINE VARS #
-# #
-# #
-# #
-# #
-# #
-
-# csv_file_path = "file3.csv"
-# output_yaml_file_path_spine = "spine_evpn_vars.yml"
-
-# data = defaultdict(list)  # Use defaultdict to group data by function
-
-# with open(csv_file_path, 'r') as csv_file:
-#     reader = csv.DictReader(csv_file)
-#     for row in reader:
-#         function = row["function"]
-#         print(function)
-
-# ##############################################
-# #          PROCESS SPINES in CVS              #
-# ##############################################
-
-
-#         if function == "spine":
-#             data[function].append({
-#                 "hostname": row["hostname"],
-#                 "features": row["feature"].split(","),
-#                 "loopback": row["loopback0"],# + "/32",
-#                 "loopback1": row["loopback1"],# + "/32",
-#                 #"vlan_segments": row["Vlan <> vn segment"].split("\n"),
-#                 "interface_to_leaf": row["downlink_to_leaf"].split("\n"),
-#                 #"vrf": row["vrf"],
-# 	            #"vlan": row["vlan"].split(","),
-#                 #"l3vni": row["L3vni"],
-#                 #"l3vni_svi": row["L3vni_svi"],
-#                 #"vlan_anycast_gw": row["vlan <> anycast_gw"].split("\n"),
-#                 #"anycast_gateway_mac": row["anycast_gateway_mac"],
-#                 "ospf_process": row["ospf_process"],
-#                 #"nve_multicast_grp": row["nve_multicast_grp"],
-#                 "pim_rp_address": row["pim_rp_address"],
-#                 "pim_grp_list": row["pim_grp_list"],
-#                 "pim_ssm_range": row["pim_ssm_range"],
-#                 "spine_rp_address": row["spine_rp_address"].split(","),
-#                 "local_bgp_as": row["local_bgp_as"],
-#                 "remote_bgp_as": row["remote_bgp_as"],
-#                 "bgp_neighbor": row["bgp_neighbor"].split(","),
-#                 #"advertised_network": row["advertised_network"].split(",")
-#             })
-
-# with open(output_yaml_file_path_spine, 'w') as yaml_file:
-#     for function, items in data.items():
+# with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+#     for function, items in vpc_config.items():
 #         yaml_file.write("{}:\n".format(function))
 #         for item in items:
-# #            print(item)
-#             yaml_file.write("- hostname: {}\n".format(item["hostname"]))
+#             print("Debug - item:", item)
 
-#             yaml_file.write("  features:\n")
-#             for feature in item["features"]:
-#                 yaml_file.write("    - {}\n".format(feature))
-
-#             yaml_file.write("  loopback0: {}\n".format(item["loopback"]))
-
-#             yaml_file.write("  loopback1: {}\n".format(item["loopback1"]))
-
-# #            vlan_segments = item["vlan_segments"]
-# #            for i, segment in enumerate(vlan_segments):
-# #                if "," in segment:
-# #                    vlan, vn_segment = segment.split(",", 1)
-# #                    vlan_key = "Vlan{}".format(i+1)
-# #                    segment_key = "vn segment{}".format(i+1)
-# #                    yaml_file.write("  {}: {}\n".format(vlan_key, vlan.strip()))
-# #                    yaml_file.write("  {}: {}\n".format(segment_key, vn_segment.strip()))
+#             ucs_fi_value = item['vpc_policy_group_name']
+#             yaml_file.write("  - vpc_policy_group: {}\n".format(ucs_fi_value))
 
 
-#             interface_to_leaf = item["interface_to_leaf"]
-#             for i, description in enumerate(interface_to_leaf):
-#                 if "," in description:
-#                     interface, desc = description.split(",", 1)
-#                     interface_key = "Ethernet{}".format(i+1)
-#                     desc_key = "description{}".format(i+1)
-#                     yaml_file.write("  {}: {}\n".format(interface_key, interface.strip()))
-#                     yaml_file.write("  {}: {}\n".format(desc_key, desc.strip()))
+            # yaml_file.write("- vpc_policy_group: {}\n".format(item["vpc_policy_group_name"]))
+            # yaml_file.write("  associated_cdp_policy: {}\n".format(item["associated_cdp_policy"]))
+            # yaml_file.write("  associated_lacp_policy: {}\n".format(item["associated_lacp_policy"]))
+            # yaml_file.write("  associated_aaep: {}\n".format(item["associated_aaep"]))
+           
+            # yaml_file.write("- leaf_interface_profile_name: {}\n".format(item["leaf_interface_profile_name"]))
+            # #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            # yaml_file.write("  leaf_interface_profile_desc: {}\n".format(item["leaf_interface_profile_desc"]))
+
+            # yaml_file.write("- interface_selector: {}\n".format(item["interface_selector_name"]))
+            # #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            # yaml_file.write("  from_port: {}\n".format(item["from_port"]))
+            # yaml_file.write("  to_port: {}\n".format(item["to_port"]))
+
+            # yaml_file.write("- leaf_name: {}\n".format(item["leaf_name"]))
+            # #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            # yaml_file.write("  from_switch: {}\n".format(item["from_switch"]))
+            # yaml_file.write("  to_switch: {}\n".format(item["to_switch"]))          
 
 
-# #            yaml_file.write("  vrf: {}\n".format(item["vrf"]))
 
-# #            yaml_file.write("  vlan:\n")
-# #            for vlan in item["vlan"]:
-# #                yaml_file.write("    - {}\n".format(vlan))
-
-# #            yaml_file.write("  l3vni: {}\n".format(item["l3vni"]))
-
-# #            yaml_file.write("  l3vni_svi: {}\n".format(item["l3vni_#svi"]))
-
-# #            vlan_anycast_gw = item["vlan_anycast_gw"]
-# #            for i, gateway in enumerate(vlan_anycast_gw):
-# #                if "," in gateway:
-# #                    vlan, gw = gateway.split(",", 1)
-# #                    vlan_key = "gw_vlan{}".format(i+1)
-# #                    gw_key = "vlan_anycast_gateway{}".format(i+1)
-# #                    yaml_file.write("  {}: {}\n".format(vlan_key, vlan.strip()))
-# #                    yaml_file.write("  {}: {}\n".format(gw_key, gw.strip()))
-
-# #            yaml_file.write("  anycast_gateway_mac: {}\n".format(item["anycast_gateway_mac"]))
-
-#             yaml_file.write("  ospf_process: {}\n".format(item["ospf_process"]))
-
-# #            yaml_file.write("  nve_multicast_grp: {}\n".format(item["nve_multicast_grp"]))
-
-#             yaml_file.write("  pim_rp_address: {}\n".format(item["pim_rp_address"]))
-
-#             yaml_file.write("  pim_grp_list: {}\n".format(item["pim_grp_list"]))
-
-#             yaml_file.write("  pim_ssm_range: {}\n".format(item["pim_ssm_range"]))
-
-#             yaml_file.write("  spine_rp_address:\n")
-#             for spine_rp_address in item["spine_rp_address"]:
-#                 yaml_file.write("    - {}\n".format(spine_rp_address))
-
-#             yaml_file.write("  local_bgp_as: {}\n".format(item["local_bgp_as"]))
-
-#             yaml_file.write("  remote_bgp_as: {}\n".format(item["remote_bgp_as"]))
-
-#             yaml_file.write("  bgp_neighbor:\n")
-#             for bgp_neighbor in item["bgp_neighbor"]:
-#                 yaml_file.write("    - {}\n".format(bgp_neighbor))
-
-# #            yaml_file.write("  advertised_network:\n")
-# #            for advertised_network in item["advertised_network"]:
-# #                yaml_file.write("    - {}\n".format(advertised_network))
 
 
             
-#             yaml_file.write("\n")
-#         print(f"YAML file generated at: {output_yaml_file_path_spine}")
+            
+        #yaml_file.write("\n")
 
-
-#         # move the extraced vars to roles/spine/vars
-
-#         # Define the source file path for LEAF
-#         source_file = 'spine_evpn_vars.yml'
-
-#         # Define the destination folder path
-#         destination_folder = 'roles/spine/vars'
-
-#         # Define the new file name
-#         new_file_name = 'main.yml'
-
-#         # Create the full path for the destination file
-#         destination_file = os.path.join(destination_folder, new_file_name)
-
-#         # Move the file to the destination folder
-#         shutil.move(source_file, destination_file)
-
-# # Output a success message
-# print(f"The file '{source_file}' has been moved to '{destination_file}' and renamed to '{new_file_name}'.")
-
-# print(" PYTHON EXTRACTION COMPLETE- VARS EXTRACTED FROM CSV SUCCESSFULLY")
-# print("NOW RUNNING ANSIBLE PLAYBOOK TO WRITE CONFIG FILES")
+#pprint.pprint(vpc_config)
 
 
 
@@ -732,18 +700,7 @@ workbook.close()
 
 
 
-# #run ansible script to generate configs
-
-# ansible_command = ['ansible-playbook', 'site.yml']
-# print(ansible_command)
-
-# subprocess.run(ansible_command, check=True)
-
-
-
-
-
-
-
+# # Close the Excel file
+workbook.close()
 
 

@@ -1,0 +1,7 @@
+lacp_policy:
+- lacp_policy: lacp_mark_active
+  description: lacp_enabled
+  min_links: 1
+  max_links: 16
+  mode: active
+

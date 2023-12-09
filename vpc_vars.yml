@@ -1,0 +1,4 @@
+vpc_policy_group:
+  - vpc_policy_group: UCS_FI
+
+leaf_interface_profile:

@@ -1,12 +1,12 @@
-provider "aci" {
-  # cisco-aci user name
-  username = "admin"
-  # cisco-aci password
-  password = "!v3G@!4@Y"
-  # cisco-aci url
-  url      =  "https://sandboxapicdc.cisco.com"
-  insecure = true
-}
+# provider "aci" {
+#   # cisco-aci user name
+#   username = "admin"
+#   # cisco-aci password
+#   password = "!v3G@!4@Y"
+#   # cisco-aci url
+#   url      =  "https://sandboxapicdc.cisco.com"
+#   insecure = true
+# }
 
 
 #new locals for tenants
@@ -63,8 +63,9 @@ resource "aci_bridge_domain" "bridge_domains" {
   description = each.value.bd_description
   arp_flood   = "yes"
   unk_mac_ucast_act = "flood"
+  #unicast_route = "no"
   relation_fv_rs_ctx = "uni/tn-${each.value.bd_tenant_name}/ctx-${each.value.bd_vrf}"
-  #relation_fv_rs_ctx = "marks_vrf"
+  
 
 
 
