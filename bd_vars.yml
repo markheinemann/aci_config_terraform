@@ -1,16 +1,26 @@
 bd:
 - bd: mark_first_bd_for_subnet
   bd_tenant_name: marks_first_tenant
-  bd_description: This bridge domain is created by the Terraform ACI provider1
+  bd_description: This 1st bridge domain is created by the Terraform ACI provider
   bd_vrf: marks_vrf
 
 - bd: mark_second_bd_for_subnet
   bd_tenant_name: marks_first_tenant
-  bd_description: This other  bridge domain is created by the Terraform ACI provider1
+  bd_description: This 2nd  bridge domain is created by the Terraform ACI provider
   bd_vrf: marks_vrf
 
 - bd: mark_third_bd_for_subnet
   bd_tenant_name: marks_first_tenant
-  bd_description: This 3rd  bridge domain is created by the Terraform ACI provider1
+  bd_description: This 3rd  bridge domain is created by the Terraform ACI provider
+  bd_vrf: marks_vrf
+
+- bd: mark_fourth_bd_for_subnet
+  bd_tenant_name: marks_first_tenant
+  bd_description: This 4th  bridge domain is created by the Terraform ACI provider
+  bd_vrf: marks_vrf
+
+- bd: mark_fifth_bd_for_subnet
+  bd_tenant_name: marks_first_tenant
+  bd_description: This 5th  bridge domain is created by the Terraform ACI provider
   bd_vrf: marks_vrf
 
