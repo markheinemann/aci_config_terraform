@@ -24,3 +24,8 @@ epg:
   epg_map_to_bd: mark_fifth_bd_for_subnet
   epg_map_to_app_profile: prod_app_profile
 
+- epg: mark_sixth_epg
+  epg_tenant: marks_first_tenant
+  epg_map_to_bd: mark_sixth_bd_for_subnet
+  epg_map_to_app_profile: prod_app_profile
+

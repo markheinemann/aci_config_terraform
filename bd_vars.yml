@@ -24,3 +24,8 @@ bd:
   bd_description: This 5th  bridge domain is created by the Terraform ACI provider
   bd_vrf: marks_vrf
 
+- bd: mark_sixth_bd_for_subnet
+  bd_tenant_name: marks_first_tenant
+  bd_description: This 6th  bridge domain is created by the Terraform ACI provider
+  bd_vrf: marks_vrf
+
