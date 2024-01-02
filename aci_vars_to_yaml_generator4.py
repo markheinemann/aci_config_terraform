@@ -89,7 +89,8 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
         
         data_vrf[type].append({
             "vrf_name": row[1],  
-            "vrf_tenant": data_tenant["tenant"][0]["tenant_name"]
+            #"vrf_tenant": data_tenant["tenant"][0]["tenant_name"]
+            "vrf_tenant": row[2]
         })
 
 
@@ -134,10 +135,12 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if type == "bd":
         #print("match")
         data_bd[type].append({
-            "bd_tenant_name": data_tenant["tenant"][0]["tenant_name"],
+            #"bd_tenant_name": data_tenant["tenant"][0]["tenant_name"],
+            "bd_tenant_name": row[3],
             "bd_name": row[1],
             "bd_description": row[2],
-            "bd_vrf": data_vrf['vrf'][0]['vrf_name']
+            #"bd_vrf": data_vrf['vrf'][0]['vrf_name'],
+            "bd_vrf": row[4]
         })
 
 
@@ -180,7 +183,8 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if type == "subnet":
         data_subnet[type].append({
             "subnet_name": row[1],
-            "subnet_tn_name": data_tenant["tenant"][0]["tenant_name"],
+            #"subnet_tn_name": data_tenant["tenant"][0]["tenant_name"],
+            "subnet_tn_name": row[5],
             "subnet_bd": row[2],
             "subnet_scope": row[3],
             "subnet_description": row[4]
@@ -239,7 +243,8 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if type == "app_profile":
             data_app_profile[type].append({
                 "app_profile_name": row[1],
-                "app_profile_tenant": data_tenant["tenant"][0]["tenant_name"]
+                #"app_profile_tenant": data_tenant["tenant"][0]["tenant_name"]
+                "app_profile_tenant": row[2]
             })
 
 with open(output_yaml_file_path_leaf, 'w') as yaml_file:
@@ -277,6 +282,8 @@ data_epg = defaultdict(list)
 #workbook = openpyxl.load_workbook(xlsx_file_path)
 worksheet = workbook[worksheet_name]
 
+index = 0  # Initialize an index to track your position in the data_bd["bd"] list
+
 for row in worksheet.iter_rows(min_row=2, values_only=True):
     type = row[0]  # Assuming "type" is in the first column
     print(type)
@@ -286,10 +293,13 @@ for row in worksheet.iter_rows(min_row=2, values_only=True):
     if type == "epg":
         data_epg[type].append({
             "epg_name": row[1],
-            "epg_tenant": data_tenant["tenant"][0]["tenant_name"],
+            #"epg_tenant": data_tenant["tenant"][0]["tenant_name"],
+            "epg_tenant": row[4],
             "epg_map_to_bd": row[2],
+            "epg_map_to_bd_tenant": data_bd["bd"][index]["bd_tenant_name"],
             "epg_map_to_app_profile": row[3]
         })
+        index += 1
 
 with open(output_yaml_file_path_leaf, 'w') as yaml_file:
     for function, items in data_epg.items():
@@ -299,6 +309,7 @@ with open(output_yaml_file_path_leaf, 'w') as yaml_file:
             yaml_file.write("- epg: {}\n".format(item["epg_name"]))
             yaml_file.write("  epg_tenant: {}\n".format(item["epg_tenant"]))
             yaml_file.write("  epg_map_to_bd: {}\n".format(item["epg_map_to_bd"]))
+            yaml_file.write("  epg_map_to_bd_tenant: {}\n".format(item["epg_map_to_bd_tenant"]))
             yaml_file.write("  epg_map_to_app_profile: {}\n".format(item["epg_map_to_app_profile"]))
 
             

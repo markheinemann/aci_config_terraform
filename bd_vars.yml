@@ -1,36 +1,46 @@
 bd:
 - bd: mark_first_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 1st bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_second_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 2nd  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_third_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 3rd  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_fourth_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 4th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_fifth_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 5th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_sixth_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 6th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
 
 - bd: mark_seventh_bd_for_subnet
-  bd_tenant_name: marks_first_tenant
+  bd_tenant_name: common
   bd_description: This 7th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf
+  bd_vrf: marks_vrf_lan
+
+- bd: mark_1st_dmz_bd_for_subnet
+  bd_tenant_name: common
+  bd_description: dmz1
+  bd_vrf: marks_vrf_dmz
+
+- bd: mark_2nd_dmz_bd_for_subnet
+  bd_tenant_name: common
+  bd_description: dmz2_
+  bd_vrf: marks_vrf_dmz
 

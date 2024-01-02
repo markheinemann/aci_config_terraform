@@ -18,12 +18,14 @@ locals {
 
 
 output "tenant_details" {
-  value = { for t in local.yaml_tenants.tenant : t.tenant => t }
+  #value = { for t in local.yaml_tenants.tenant : t.tenant => t }
+  value = { for t in local.yaml_tenants.tenant : t.tenant => t if lower(t.tenant) != "common" }
 }
 
 
+
 resource "aci_tenant" "tenants" {
-  for_each = { for t in local.yaml_tenants.tenant : t.tenant => t }
+  for_each = { for t in local.yaml_tenants.tenant : t.tenant => t if lower(t.tenant) != "common"}
 
   name        = each.value.tenant
   description = each.value.description
@@ -124,7 +126,7 @@ resource "aci_application_epg" "epgs" {
   for_each = { for t in local.yaml_epg.epg: t.epg => t }
   name = each.value.epg
   application_profile_dn = "uni/tn-${each.value.epg_tenant}/ap-${each.value.epg_map_to_app_profile}"
-  relation_fv_rs_bd = "uni/tn-${each.value.epg_tenant}/BD-${each.value.epg_map_to_bd}"
+  relation_fv_rs_bd = "uni/tn-${each.value.epg_map_to_bd_tenant}/BD-${each.value.epg_map_to_bd}"
 
   depends_on = [
     aci_tenant.tenants,

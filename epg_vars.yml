@@ -1,36 +1,55 @@
 epg:
 - epg: mark_first_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_first_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_second_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_second_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_third_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_third_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_fouth_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_fourth_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_fifth_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_fifth_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_sixth_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_sixth_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
 
 - epg: mark_seventh_epg
-  epg_tenant: marks_first_tenant
+  epg_tenant: marks_network_centric
   epg_map_to_bd: mark_seventh_bd_for_subnet
+  epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_app_profile
+
+- epg: mark_1st_dmz__epg
+  epg_tenant: marks_network_centric
+  epg_map_to_bd: mark_1st_dmz_bd_for_subnet
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: prod_dmz_app_profile
+
+- epg: mark_2nd_dmz_epg
+  epg_tenant: marks_network_centric
+  epg_map_to_bd: mark_2nd_dmz_bd_for_subnet
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: prod_dmz_app_profile
 

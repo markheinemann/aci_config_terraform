@@ -1,4 +1,7 @@
 vrf:
-- vrf: marks_vrf
-  vrf_tenant: marks_first_tenant
+- vrf: marks_vrf_lan
+  vrf_tenant: common
+
+- vrf: marks_vrf_dmz
+  vrf_tenant: common
 
