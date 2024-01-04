@@ -44,3 +44,8 @@ bd:
   bd_description: dmz2_
   bd_vrf: marks_vrf_dmz
 
+- bd: bd_vlan996_10.255.60.0_255.255.255.224_oob_mgt_internet
+  bd_tenant_name: common
+  bd_description: None
+  bd_vrf: marks_vrf_lan
+

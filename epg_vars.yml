@@ -53,3 +53,9 @@ epg:
   epg_map_to_bd_tenant: common
   epg_map_to_app_profile: prod_dmz_app_profile
 
+- epg: epg_vlan996_10.255.60.0_255.255.255.224_oob_mgt_internet
+  epg_tenant: marks_network_centric
+  epg_map_to_bd: bd_vlan996_10.255.60.0_255.255.255.224_oob_mgt_internet
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: prod_app_profile
+
