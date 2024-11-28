@@ -1,3 +1,4 @@
+
 # provider "aci" {
 #   # cisco-aci user name
 #   username = "admin"
@@ -192,30 +193,58 @@ output "vlan_pool_details" {
   value = { for t in local.yaml_vlan_pool.vlan_pool : t.vlan_pool => t }
 }
 
+# # creating vlan pool
+# resource "aci_vlan_pool" "vlan_pool" {
+#   for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
+#   name  = each.value.vlan_pool
+#   description = "From Terraform"
+#   alloc_mode  = each.value.allocation_mode
+# }
+
+
 # creating vlan pool
 resource "aci_vlan_pool" "vlan_pool" {
-  for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
+  for_each = { for t in local.yaml_vlan_pool.vlan_pool: "${t.vlan_pool}-${t.range_from}-${t.range_to}" => t }
   name  = each.value.vlan_pool
   description = "From Terraform"
   alloc_mode  = each.value.allocation_mode
 }
 
-#create range
-resource "aci_ranges" "range" {
-  for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
-  #vlan_pool_dn  = "uni/infra/vlanns-[mark_pool]-static"
-  vlan_pool_dn  = "uni/infra/vlanns-${each.value.vlan_pool}-${each.value.allocation_mode}"
-  description   = "From Terraform"
-  from          = each.value.range_from
-  to            = each.value.range_to
-  alloc_mode    = each.value.allocation_mode
-  #role          = "external"
+# #create range
+# resource "aci_ranges" "range" {
+#   for_each = { for t in local.yaml_vlan_pool.vlan_pool: t.vlan_pool => t }
+#   #vlan_pool_dn  = "uni/infra/vlanns-[mark_pool]-static"
+#   vlan_pool_dn  = "uni/infra/vlanns-${each.value.vlan_pool}-${each.value.allocation_mode}"
+#   description   = "From Terraform"
+#   from          = each.value.range_from
+#   to            = each.value.range_to
+#   alloc_mode    = each.value.allocation_mode
+#   #role          = "external"
 
+
+#   depends_on = [
+#   aci_vlan_pool.vlan_pool
+# ]
+# }
+
+resource "aci_ranges" "range" {
+  for_each = { for t in local.yaml_vlan_pool.vlan_pool: "${t.vlan_pool}-${t.range_from}-${t.range_to}" => t }
+  
+  # Constructing the vlan_pool_dn with the appropriate format
+  vlan_pool_dn = aci_vlan_pool.vlan_pool[each.key].id
+
+  description = "From Terraform"
+  from        = "vlan-${each.value.range_from}"
+  to          = "vlan-${each.value.range_to}"
+  alloc_mode  = each.value.allocation_mode
 
   depends_on = [
-  aci_vlan_pool.vlan_pool
-]
+    aci_vlan_pool.vlan_pool
+  ]
 }
+
+
+
 
 #new locals for Physical_Domain
 
