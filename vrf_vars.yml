@@ -1,7 +1,7 @@
 vrf:
-- vrf: marks_vrf_lan
+- vrf: lan
   vrf_tenant: common
 
-- vrf: marks_vrf_dmz
+- vrf: dmz
   vrf_tenant: common
 

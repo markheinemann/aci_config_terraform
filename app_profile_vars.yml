@@ -1,7 +1,7 @@
 app_profile:
-- app_profile: prod_app_profile
-  app_profile_tenant: marks_network_centric
+- app_profile: ap_lan
+  app_profile_tenant: network_centric
 
-- app_profile: prod_dmz_app_profile
-  app_profile_tenant: marks_network_centric
+- app_profile: ap_dmz
+  app_profile_tenant: network_centric
 
