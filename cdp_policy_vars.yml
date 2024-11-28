@@ -1,0 +1,9 @@
+cdp_policy:
+- cdp_policy: cdp_mark_enabled
+  description: cdp_enabled
+  admin_state: enabled
+
+- cdp_policy: cdp_mark_disabled
+  description: cdp_disabled
+  admin_state: disabled
+

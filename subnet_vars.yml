@@ -1,0 +1,7 @@
+subnet:
+- subnet: 10.1.1.3/24
+  subnet_tn_name: common
+  subnet_bd: bd_vlan14_10.20.2.0_24_prd_wf
+  subnet_scope: private
+  subnet_description: This aci subnet is created by Terraform
+

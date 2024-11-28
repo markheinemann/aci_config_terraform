@@ -1,0 +1,7 @@
+app_profile:
+- app_profile: ap_lan
+  app_profile_tenant: network_centric
+
+- app_profile: ap_dmz
+  app_profile_tenant: network_centric
+

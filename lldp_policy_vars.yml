@@ -1,0 +1,11 @@
+lldp_policy:
+- lldp_policy: lldp_enabled
+  description: lldp TX and RX on
+  transmit: enabled
+  receive: enabled
+
+- lldp_policy: lldp_disabled
+  description: lldp TX and RX off
+  transmit: disabled
+  receive: disabled
+

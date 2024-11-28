@@ -1,0 +1,61 @@
+epg:
+- epg: epg_vlan14_10.20.2.0_24_prd_wf
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan14_10.20.2.0_24_prd_wf
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan15_10.20.6.0_24_prd_wf
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan14_10.20.2.0_24_prd_wf
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan17_10.20.7.0_24_prd_mw
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan17_10.20.7.0_24_prd_mw
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan18_10.20.3.0_24_prd_mw
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan18_10.20.3.0_24_prd_mw
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan25_10.20.4.0_25_prd_lan
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan25_10.20.4.0_25_prd_lan
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan47_10.20.70.0_24_prd_hs
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan47_10.20.70.0_24_prd_hs
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan49_10.30.70.0_24_tda_hs
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan49_10.30.70.0_24_tda_hs
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan51_10.30.80.0_24_tda_hs
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan51_10.30.80.0_24_tda_hs
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan64_10.20.64.0_24_admin_mgmt
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan64_10.20.64.0_24_admin_mgmt
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
+- epg: epg_vlan100_10.20.100.0_24_prd_usr
+  epg_tenant: network_centric
+  epg_map_to_bd: bd_vlan100_10.20.100.0_24_prd_usr
+  epg_map_to_bd_tenant: common
+  epg_map_to_app_profile: ap_lan
+
