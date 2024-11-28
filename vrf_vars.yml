@@ -1,7 +1,0 @@
-vrf:
-- vrf: lan
-  vrf_tenant: common
-
-- vrf: dmz
-  vrf_tenant: common
-

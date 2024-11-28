@@ -1,7 +1,0 @@
-tenant:
-- tenant: network_centric
-  description: This bridge domain is created by the Terraform ACI provider1
-
-- tenant: common
-  description: None
-
