@@ -49,7 +49,7 @@ bd:
   bd_description: None
   bd_vrf: lan
 
-- bd: bd_vlan101_10.50.100.0_24_prd_usr
+- bd: bd_vlan101_10.60.100.0_24_prd_usr
   bd_tenant_name: common
   bd_description: None
   bd_vrf: lan
