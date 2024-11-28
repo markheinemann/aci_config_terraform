@@ -1,6 +1,6 @@
 vlan_pool:
 - vlan_pool: mark_pool
-  range_from: vlan-1024
-  range_to: vlan-1034
+  range_from: 1024
+  range_to: 1034
   allocation_mode: static
 
