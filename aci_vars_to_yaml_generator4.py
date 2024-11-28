@@ -14,7 +14,7 @@ import sys
 #          PROCESS tenants            #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "TENANT"
 
 output_yaml_file_path_leaf = "tenant_vars.yml"
@@ -67,7 +67,7 @@ pprint.pprint(data_tenant)
 #          PROCESS vrf           #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "VRF"
 
 output_yaml_file_path_leaf = "vrf_vars.yml"
@@ -117,7 +117,7 @@ pprint.pprint(data_vrf)
 #          PROCESS bd            #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "BD"
 
 output_yaml_file_path_leaf = "bd_vars.yml"
@@ -165,7 +165,7 @@ pprint.pprint(data_bd)
 ##############################################
 #          PROCESS subnet          #
 ##############################################
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "SUBNET"
 
 output_yaml_file_path_leaf = "subnet_vars.yml"
@@ -224,7 +224,7 @@ pprint.pprint(data_subnet)
 #          PROCESS application_profile        #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "APP_PROFILE"
 
 output_yaml_file_path_leaf = "app_profile_vars.yml"
@@ -271,7 +271,7 @@ pprint.pprint(data_app_profile)
 #          PROCESS epg       #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "EPG"
 
 output_yaml_file_path_leaf = "epg_vars.yml"
@@ -324,7 +324,7 @@ pprint.pprint(data_epg)
 #          PROCESS VLAN_Pool     #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "VLAN_POOL"
 
 output_yaml_file_path_leaf = "vlan_pool_vars.yml"
@@ -372,7 +372,7 @@ pprint.pprint(data_vlan_pool)
 #          PROCESS PHYSICAL_DOMAIN    #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "PHYSICAL_DOMAIN"
 
 output_yaml_file_path_leaf = "physical_domain_vars.yml"
@@ -417,7 +417,7 @@ pprint.pprint(data_physical_domain)
 #          PROCESS AAEP   #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "AAEP"
 
 output_yaml_file_path_leaf = "aaep_vars.yml"
@@ -461,7 +461,7 @@ pprint.pprint(data_aaep)
 #          PROCESS LINK LEVEL POLICY      #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "LINK_LEVEL_POLICY"
 
 output_yaml_file_path_leaf = "link_level_policy_vars.yml"
@@ -514,7 +514,7 @@ pprint.pprint(data_link_level_policy)
 #          PROCESS CDP INT POLICY      #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "CDP_POLICY"
 
 output_yaml_file_path_leaf = "cdp_policy_vars.yml"
@@ -557,10 +557,61 @@ pprint.pprint(cdp_policy)
 
 
 #############################################
+#          PROCESS LLDP INT POLICY      #
+##############################################
+
+xlsx_file_path = "Book3_reduced.xlsx"
+worksheet_name = "LLDP_POLICY"
+
+output_yaml_file_path_leaf = "lldp_policy_vars.yml"
+
+lldp_policy = defaultdict(list)
+
+# Open the Excel file
+#workbook = openpyxl.load_workbook(xlsx_file_path)
+worksheet = workbook[worksheet_name]
+
+for row in worksheet.iter_rows(min_row=2, values_only=True):
+    type = row[0]  # Assuming "type" is in the first column
+    print(type)
+
+
+
+    if type == "lldp_policy":
+        lldp_policy[type].append({
+            "name": row[1],
+            "description": row[2],
+            "transmit": row[3],
+            "receive": row[4]
+
+        })
+
+with open(output_yaml_file_path_leaf, 'w') as yaml_file:
+    for function, items in lldp_policy.items():
+        yaml_file.write("{}:\n".format(function))
+        for item in items:
+#            print(item)
+            yaml_file.write("- lldp_policy: {}\n".format(item["name"]))
+            #yaml_file.write("  vlan_pool_name: {}\n".format(item["vlan_pool_name"]))
+            yaml_file.write("  description: {}\n".format(item["description"]))
+            yaml_file.write("  transmit: {}\n".format(item["transmit"]))
+            yaml_file.write("  receive: {}\n".format(item["receive"]))
+
+            
+            
+            yaml_file.write("\n")
+
+pprint.pprint(lldp_policy)
+
+
+
+
+
+#############################################
 #          PROCESS LACP INT POLICY      #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "LACP_POLICY"
 
 output_yaml_file_path_leaf = "lacp_policy_vars.yml"
@@ -611,7 +662,7 @@ pprint.pprint(lacp_policy)
 #          PROCESS VPC                       #
 ##############################################
 
-xlsx_file_path = "Book2.xlsx"
+xlsx_file_path = "Book3_reduced.xlsx"
 worksheet_name = "VPC"
 
 output_yaml_file_path_leaf = "vpc_vars.yml"

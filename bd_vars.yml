@@ -1,51 +1,51 @@
 bd:
-- bd: mark_first_bd_for_subnet
+- bd: bd_vlan14_10.20.2.0_24_prd_wf
   bd_tenant_name: common
   bd_description: This 1st bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_second_bd_for_subnet
+- bd: bd_vlan15_10.20.6.0_24_prd_wf
   bd_tenant_name: common
   bd_description: This 2nd  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_third_bd_for_subnet
+- bd: bd_vlan17_10.20.7.0_24_prd_mw
   bd_tenant_name: common
   bd_description: This 3rd  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_fourth_bd_for_subnet
+- bd: bd_vlan18_10.20.3.0_24_prd_mw
   bd_tenant_name: common
   bd_description: This 4th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_fifth_bd_for_subnet
+- bd: bd_vlan25_10.20.4.0_25_prd_lan
   bd_tenant_name: common
   bd_description: This 5th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_sixth_bd_for_subnet
+- bd: bd_vlan47_10.20.70.0_24_prd_hs
   bd_tenant_name: common
   bd_description: This 6th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_seventh_bd_for_subnet
+- bd: bd_vlan49_10.30.70.0_24_tda_hs
   bd_tenant_name: common
   bd_description: This 7th  bridge domain is created by the Terraform ACI provider
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
-- bd: mark_1st_dmz_bd_for_subnet
+- bd: bd_vlan51_10.30.80.0_24_tda_hs
   bd_tenant_name: common
   bd_description: dmz1
-  bd_vrf: marks_vrf_dmz
+  bd_vrf: lan
 
-- bd: mark_2nd_dmz_bd_for_subnet
+- bd: bd_vlan64_10.20.64.0_24_admin_mgmt
   bd_tenant_name: common
   bd_description: dmz2_
-  bd_vrf: marks_vrf_dmz
+  bd_vrf: lan
 
-- bd: bd_vlan996_10.255.60.0_255.255.255.224_oob_mgt_internet
+- bd: bd_vlan100_10.20.100.0_24_prd_usr
   bd_tenant_name: common
   bd_description: None
-  bd_vrf: marks_vrf_lan
+  bd_vrf: lan
 
